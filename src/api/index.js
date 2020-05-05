@@ -8,7 +8,9 @@ export const fetchData = async () => {
       data: { confirmed, recovered, deaths, lastUpdate },
     } = await Axios.get(url);
     return { confirmed, recovered, deaths, lastUpdate };
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export const fetchDailyData = async () => {
@@ -25,5 +27,23 @@ export const fetchDailyData = async () => {
     });
 
     return modifiedData;
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const fetchCountriesData = async () => {
+  try {
+    const {
+      data: { countries },
+    } = await Axios.get(`${url}/countries`);
+    const modifiedData = countries.map((country) => {
+      return {
+        name: country.name,
+      };
+    });
+    return modifiedData;
+  } catch (error) {
+    console.log(error);
+  }
 };

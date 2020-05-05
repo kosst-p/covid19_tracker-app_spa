@@ -18,8 +18,8 @@ export default class App extends Component {
     return (
       <div className={classes.container}>
         <Cards data={data} />
+        <CountryPicker />
         <Chart />
-        {/* <CountryPicker /> */}
       </div>
     );
   }
