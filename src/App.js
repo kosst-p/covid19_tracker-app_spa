@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./App.scss";
+import classes from "./App.module.scss";
 import { Cards, Chart, CountryPicker } from "./components/imports.js";
 import { fetchData } from "./api/index.js";
 
@@ -16,7 +16,7 @@ export default class App extends Component {
   render() {
     const { data } = this.state;
     return (
-      <div className="container">
+      <div className={classes.container}>
         <Cards data={data} />
         <Chart />
         {/* <CountryPicker /> */}

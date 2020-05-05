@@ -1,5 +1,5 @@
 import React from "react";
-import "./Cards.scss";
+import classes from "./Cards.module.scss";
 import { Card, CardContent, Typography, Grid } from "@material-ui/core";
 import CountUp from "react-countup";
 import cx from "classnames";
@@ -10,14 +10,14 @@ const Cards = ({ data: { confirmed, recovered, deaths, lastUpdate } }) => {
   }
 
   return (
-    <div className="container">
+    <div className={classes.container}>
       <Grid container spacing={3} justify="center">
         <Grid
           item
           component={Card}
           xs={12}
           md={3}
-          className={cx("card", "infected")}
+          className={cx(classes.card, classes.infected)}
         >
           <CardContent>
             <Typography color="textSecondary" gutterBottom>
@@ -45,7 +45,7 @@ const Cards = ({ data: { confirmed, recovered, deaths, lastUpdate } }) => {
           component={Card}
           xs={12}
           md={3}
-          className={cx("card", "recovered")}
+          className={cx(classes.card, classes.recovered)}
         >
           <CardContent>
             <Typography color="textSecondary" gutterBottom>
@@ -73,7 +73,7 @@ const Cards = ({ data: { confirmed, recovered, deaths, lastUpdate } }) => {
           component={Card}
           xs={12}
           md={3}
-          className={cx("card", "deaths")}
+          className={cx(classes.card, classes.deaths)}
         >
           <CardContent>
             <Typography color="textSecondary" gutterBottom>
