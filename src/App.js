@@ -15,13 +15,13 @@ export default class App extends Component {
   }
 
   handleCountryChange = async (country) => {
-    if (country === "Global") {
-      const fetchedData = await fetchData();
-      this.setState({ data: fetchedData, country: country });
-    } else {
-      const fetchedData = await fetchData(country);
-      this.setState({ data: fetchedData, country: country });
-    }
+    // if (country === "Global") {
+    //   const fetchedData = await fetchData();
+    //   this.setState({ data: fetchedData, country: country });
+    // } else {
+    const fetchedData = await fetchData(country);
+    this.setState({ data: fetchedData, country: country });
+    // }
   };
 
   render() {
