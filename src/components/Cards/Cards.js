@@ -9,92 +9,64 @@ const Cards = ({ data: { confirmed, recovered, deaths, lastUpdate } }) => {
     return "Loading...";
   }
 
+  const renderCards = () => {
+    let typesOfData = [];
+    const objectWithData = { confirmed, recovered, deaths };
+    for (const key in objectWithData) {
+      if (typeof objectWithData[key] === "object") {
+        typesOfData.push({ name: key, ...objectWithData[key], lastUpdate });
+      }
+    }
+
+    return typesOfData.map((type, index) => {
+      const style = classes[type.name]; // вынес в переменную, чтобы потом использовать в cx
+      return (
+        <Grid
+          key={index}
+          item
+          component={Card}
+          xs={12}
+          md={3}
+          className={cx(classes.card, style)}
+        >
+          <CardContent>
+            <Typography color="textSecondary" gutterBottom>
+              {type.name.charAt(0).toUpperCase() + type.name.substring(1)}
+            </Typography>
+            <Typography variant="h5">
+              <CountUp
+                start={0}
+                end={type.value}
+                duration={2.5}
+                separator=","
+              />
+            </Typography>
+            <Typography color="textSecondary">
+              {new Date(type.lastUpdate).toDateString()}
+            </Typography>
+            <Typography variant="body2">
+              {type.name === "confirmed"
+                ? "Number of active cases of COVID-19"
+                : null}
+              {type.name === "recovered"
+                ? "Number of recoveries from COVID-19"
+                : null}
+              {type.name === "deaths"
+                ? "Number of deaths caused by COVID-19"
+                : null}
+            </Typography>
+          </CardContent>
+        </Grid>
+      );
+    });
+  };
+
+  renderCards();
+
   return (
     <div className={classes.container}>
       <Grid container spacing={3} justify="center">
-        <Grid
-          item
-          component={Card}
-          xs={12}
-          md={3}
-          className={cx(classes.card, classes.infected)}
-        >
-          <CardContent>
-            <Typography color="textSecondary" gutterBottom>
-              Infected
-            </Typography>
-            <Typography variant="h5">
-              <CountUp
-                start={0}
-                end={confirmed.value}
-                duration={2.5}
-                separator=","
-              />
-            </Typography>
-            <Typography color="textSecondary">
-              {new Date(lastUpdate).toDateString()}
-            </Typography>
-            <Typography variant="body2">
-              Number of active cases of COVID-19
-            </Typography>
-          </CardContent>
-        </Grid>
-
-        <Grid
-          item
-          component={Card}
-          xs={12}
-          md={3}
-          className={cx(classes.card, classes.recovered)}
-        >
-          <CardContent>
-            <Typography color="textSecondary" gutterBottom>
-              Recovered
-            </Typography>
-            <Typography variant="h5">
-              <CountUp
-                start={0}
-                end={recovered.value}
-                duration={2.5}
-                separator=","
-              />
-            </Typography>
-            <Typography color="textSecondary">
-              {new Date(lastUpdate).toDateString()}
-            </Typography>
-            <Typography variant="body2">
-              Number of recoveries from COVID-19
-            </Typography>
-          </CardContent>
-        </Grid>
-
-        <Grid
-          item
-          component={Card}
-          xs={12}
-          md={3}
-          className={cx(classes.card, classes.deaths)}
-        >
-          <CardContent>
-            <Typography color="textSecondary" gutterBottom>
-              Deaths
-            </Typography>
-            <Typography variant="h5">
-              <CountUp
-                start={0}
-                end={deaths.value}
-                duration={2.5}
-                separator=","
-              />
-            </Typography>
-            <Typography color="textSecondary">
-              {new Date(lastUpdate).toDateString()}
-            </Typography>
-            <Typography variant="body2">
-              Number of deaths caused by COVID-19
-            </Typography>
-          </CardContent>
-        </Grid>
+        {renderCards()}
       </Grid>
     </div>
   );
