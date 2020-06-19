@@ -35,7 +35,11 @@ export default class App extends Component {
         <Cards data={data} />
         <CountryPicker handleCountryChange={this.handleCountryChange} />
         <Chart data={data} country={country} />
-        <YMInitializer accounts={[65008369]} />
+        <YMInitializer
+          accounts={[65008369]}
+          options={{ webvisor: true }}
+          version="2"
+        />
       </div>
     );
   }
