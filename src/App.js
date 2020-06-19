@@ -3,6 +3,7 @@ import classes from "./App.module.scss";
 import { Cards, Chart, CountryPicker } from "./components/imports.js";
 import { fetchData } from "./api/index.js";
 import coronaImage from "./images/stay-home.png";
+import { YMInitializer } from "react-yandex-metrika";
 
 export default class App extends Component {
   state = {
@@ -34,6 +35,7 @@ export default class App extends Component {
         <Cards data={data} />
         <CountryPicker handleCountryChange={this.handleCountryChange} />
         <Chart data={data} country={country} />
+        <YMInitializer accounts={[65008369]} />
       </div>
     );
   }
